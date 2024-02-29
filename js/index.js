@@ -2,8 +2,15 @@
 const btnContainer = document.getElementById('btn-container');
 const cardContainer = document.getElementById('card-container');
 const errorElement = document.getElementById('error-element');
+const sortBtn = document.getElementById('sort-btn');
 
 let selectedCategory = 1000;
+let shortByView = false;
+
+sortBtn.addEventListener('click', () =>{
+    shortByView = true;
+    fetchDataByCategories(selectedCategory, shortByView);
+})
 
 const fetchCategories = () =>{
     const url = 'https://openapi.programming-hero.com/api/videos/categories';
@@ -17,13 +24,21 @@ const fetchCategories = () =>{
             newBtn.className = 'btn btn-gost bg-slate-700 text-white';
             newBtn.innerText = card.category;
             // Click btn function use
-            newBtn.addEventListener('click', () =>fetchDataByCategories(card.category_id))
+            newBtn.addEventListener('click', () =>{
+            fetchDataByCategories(card.category_id)
+            const allBtns = document.querySelectorAll('.btn')
+            for(const btn of allBtns){
+                btn.classList.remove('bg-red-600')
+            }
+            newBtn.classList.add('bg-red-600')
+            })
+
             btnContainer.appendChild(newBtn);
         })
     })
 }
 
-const fetchDataByCategories = (categoryId) =>{
+const fetchDataByCategories = (categoryId, shortByView) =>{
     // console.log(categoryId);
     selectedCategory = categoryId;
 
@@ -31,6 +46,17 @@ const fetchDataByCategories = (categoryId) =>{
     fetch(url)
     .then((res) => res.json())
     .then(({data}) => {
+
+        if(shortByView){
+            data.sort((a, b) =>{
+                const totalViewsStrFirst = a.others?.views;
+                const totalViewsStrSecond = b.others?.views;
+                const totalViewFirstNumber = parseFloat(totalViewsStrFirst.replace("K", '')) || 0;
+                const totalViewSecondNumber = parseFloat(totalViewsStrSecond.replace("K", '')) || 0;
+                return totalViewSecondNumber - totalViewFirstNumber;
+            })
+        }
+
         if(data.length === 0){
             errorElement.classList.remove('hidden');
         }
@@ -79,4 +105,4 @@ const fetchDataByCategories = (categoryId) =>{
 
 fetchCategories()
 
-fetchDataByCategories(selectedCategory)
+fetchDataByCategories(selectedCategory, shortByView)
