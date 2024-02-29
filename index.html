@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- daisy UI and tailwind CSS link -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- header Section -->
+    <header>
+        <section class="container mx-auto my-10 flex-col-1 lg:flex space-y-4 pl-4 justify-between items-center">
+            <div>
+                <img src="./images/Logo.png" alt="">
+            </div>
+            <div class="px-6 py-3 rounded-lg bg-gray-200">
+                <button class="text-xl text-black font-semibold">Short by View</button>
+            </div>
+            <div class="px-6 py-3 rounded-lg bg-red-400">
+                <button class="text-xl text-white font-semibold">Blog</button>
+            </div>
+        </section>
+    </header>
+    <hr>
+    <section class="flex justify-center items-center">
+        <div id="btn-container" class="mt-12 space-x-4 ml-24">
+            <!-- <button class="btn btn-gost bg-slate-700 text-white">All</button>
+            <button class="btn btn-gost bg-slate-700 text-white">Music</button>
+            <button class="btn btn-gost bg-slate-700 text-white">Comedy</button>
+            <button class="btn btn-gost bg-slate-700 text-white">Drawing</button> -->
+        </div>
+    </section>
+    <!-- Main Section -->
+    <section class="mt-12">
+        <div id="error-element" class ="hidden mt-24">
+            <img class="mx-auto" src="./images/Icon.png" alt="">
+            <h1 class="text-3xl mt-3 text-slate-500 text-center">Oops!! Sorry, There is no content here</h1>
+        </div>
+        <div id="card-container" class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-5">
+            
+        </div>
+    </section>
+
+
+
+
+    <script src="./js/index.js"></script>
+</body>
+</html>
